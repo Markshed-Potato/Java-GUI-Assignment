@@ -16,19 +16,19 @@ public class SurveyProgressIndicator extends JFrame {
     private JLabel messageLabel;
 
     public SurveyProgressIndicator() {
-        // Set up the frame
+
         setTitle("Survey Progress Indicator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(450, 450);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        // Create main panel with padding
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // Create and add progress bar
+
         progressBar = new JProgressBar(0, 100);
         progressBar.setValue(0);
         progressBar.setStringPainted(false);
@@ -38,28 +38,25 @@ public class SurveyProgressIndicator extends JFrame {
         mainPanel.add(progressBar);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // Create form fields
+
         nameField = createFormField(mainPanel, "Full Name:");
         birthField = createFormField(mainPanel, "Date of Birth:");
         genderField = createFormField(mainPanel, "Gender:");
         numberField = createFormField(mainPanel, "Contact Number:");
         emailField = createFormField(mainPanel, "Email Address:");
 
-        // Add document listeners to all fields
         addDocumentListener(nameField);
         addDocumentListener(birthField);
         addDocumentListener(genderField);
         addDocumentListener(numberField);
         addDocumentListener(emailField);
 
-        // Create message label
         messageLabel = new JLabel("");
         messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(messageLabel);
 
-        // Create submit button panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         submitButton = new JButton("Submit");
@@ -71,28 +68,23 @@ public class SurveyProgressIndicator extends JFrame {
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         mainPanel.add(buttonPanel);
 
-        // Add main panel to frame
         add(mainPanel);
-
-        // Make the frame visible
         setVisible(true);
     }
 
     private JTextField createFormField(JPanel panel, String labelText) {
-        // Create a container panel for label and field
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));
         containerPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
         containerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Create a panel to center both label and field together
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel(labelText);
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JTextField textField = new JTextField(30); // Set columns to 30 for longer field
+        JTextField textField = new JTextField(30);
         textField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         centerPanel.add(label);
@@ -139,12 +131,10 @@ public class SurveyProgressIndicator extends JFrame {
         int progressValue = (filledFields * 100) / totalFields;
         progressBar.setValue(progressValue);
 
-        // Clear message when user is typing
         messageLabel.setText("");
     }
 
     private void handleSubmit() {
-        // Check if all fields are filled
         if (nameField.getText().trim().isEmpty() ||
                 birthField.getText().trim().isEmpty() ||
                 genderField.getText().trim().isEmpty() ||
@@ -160,7 +150,6 @@ public class SurveyProgressIndicator extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Use SwingUtilities to ensure thread safety
         SwingUtilities.invokeLater(() -> new SurveyProgressIndicator());
     }
 }
